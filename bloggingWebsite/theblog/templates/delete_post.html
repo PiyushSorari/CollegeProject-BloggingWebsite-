@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Delete blog post {% endblock %}
+{% block content %}
+    
+{% if user.is_authenticated %}
+
+{% load static %}
+
+<html>
+<head>
+	<style type="text/css">
+		body{
+		background-repeat: no-repeat;
+		background-size: 1366px 663px;
+		background-position: top;
+		background-attachment: fixed;
+		background-image: url('{% static "update&delete.jpg" %}');
+		}
+	</style>
+</head>
+
+<body>
+
+	<h4>Delete Post<h4>
+	<br/><br/>
+	<h3>Delete: {{ post.title }} </h3>
+
+	<br/>
+	<div class="form-group">
+		<form method="POST">
+			{% csrf_token %}
+			<strong>Are you sure you want to delete the post?</strong><br/>
+			<button class="btn btn-secondary">Delete Post</button>  <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+	</div>
+</body>
+
+{% else %}
+You are not allowed here.
+
+{% endif %}
+
+{% endblock %}

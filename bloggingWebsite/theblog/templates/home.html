@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+{% load static %}
+
+<html>
+<head>
+	<style type="text/css">
+		body{
+		background-repeat: no-repeat;
+		background-size: 1366px 663px;
+		background-position: top;
+		background-attachment: fixed;
+		background-image: url('{% static "home1.jpg" %}');
+		}
+	</style>
+</head>
+
+<body>
+	<h3>Post<h3>
+
+	<ul>
+	{% for post in object_list %}
+
+		<h4>	
+		<li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> -	{{ post.author.first_name }} 
+		{{ post.author.last_name }} - 
+		{{ post.post_date }} - 
+
+		{% if user.is_authenticated %}
+
+		<small>
+			<a href="{% url 'update_post' post.pk %}">(Edit)</a> - 
+			<a href="{% url 'delete_post' post.pk %}">(Delete)</a> <br/>
+		</small>
+
+		{% endif %}
+		
+		{{ post.body|slice:":100" }}</li>
+		</h4>
+	{% endfor %}
+
+	</ul>
+</body>
+</html>
+{% endblock %}

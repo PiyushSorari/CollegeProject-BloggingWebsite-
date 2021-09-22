@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} Edit blog post {% endblock %}
+{% block content %}
+    
+{% if user.is_authenticated %}
+
+{% load static %}
+
+<html>
+<head>
+	<style type="text/css">
+		body{
+		background-repeat: no-repeat;
+		background-size: 1366px 663px;
+		background-position: top;
+		background-attachment: fixed;
+		background-image: url('{% static "update&delete.jpg" %}');
+		}
+	</style>
+</head>
+
+<body>
+
+	<h4>Update Post<h4>
+	<div class="form-group">
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}			
+			<button class="btn btn-secondary">Update</button>  <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+	</div>
+
+</body>
+{% else %}
+
+You are not allowed here! 
+
+{% endif %}
+
+{% endblock %}
